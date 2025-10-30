@@ -141,41 +141,33 @@ const downloadMod = async () => {
     };
     zip.file('config.json', JSON.stringify(configJson, null, 2));
 
-    // Helper: normalize simple single-quoted strings and semicolons inside function bodies
-    const normalizeFunctionBody = (body) => {
-      if (!body) return '';
+    // Extract global variable declarations (lines before any function)
+    const lines = userCode.split('\n');
+    const globalVars = [];
+    let seenFunction = false;
 
-      // Convert simple single-quoted strings to double quotes
-      body = body.replace(/'([^'\n]*)'/g, "\"$1\"");
-
-      // Normalize each line: add semicolons for statements (but keep blank lines and comments)
-      const lines = body.split('\n');
-      const out = [];
-      for (let line of lines) {
-        const trimmed = line.trim();
-        if (trimmed === '' || trimmed.startsWith('--')) {
-          out.push(line);
-          continue;
-        }
-        // Don't append semicolon to control/definition lines
-        if (/\bfunction\b/.test(trimmed) || /^\s*end\s*$/.test(trimmed) || /\bthen$/.test(trimmed) || /^\s*(if|for|while)\b/.test(trimmed)) {
-          out.push(line);
-          continue;
-        }
-        if (!/;\s*$/.test(trimmed)) {
-          line = line.replace(/\s*$/, '') + ';';
-        }
-        out.push(line);
+    for (const line of lines) {
+      const trimmed = line.trim();
+      if (trimmed.includes('GameModeController.')) {
+        seenFunction = true;
+        break;
       }
-      // Trim leading/trailing blank lines
-      while (out.length && out[0].trim() === '') out.shift();
-      while (out.length && out[out.length - 1].trim() === '') out.pop();
-      return out.join('\n');
-    };
+      if (trimmed && !trimmed.startsWith('--')) {
+        globalVars.push(line);
+      }
+    }
 
     // Detect lifecycle defs (as before)
     const { hasStart, hasUpdate, hasDestroy } = findLifecycleDefs(userCode);
     let gamemodeControllerCode = '';
+
+    // Add global variables first (including newNode = nil and local declarations)
+    if (globalVars.length > 0) {
+      gamemodeControllerCode += globalVars.join('\n') + '\n\n';
+    } else if (!userCode.includes('newNode = nil')) {
+      // Fallback: add newNode = nil if not present
+      gamemodeControllerCode += 'newNode = nil\n';
+    }
 
     // Try to extract last Start/Update/Destroy bodies from user's code (non-greedy)
     const extractBody = (code, name) => {
@@ -191,50 +183,63 @@ const downloadMod = async () => {
     const updateBody = extractBody(userCode, 'Update');
     const destroyBody = extractBody(userCode, 'Destroy');
 
-    // Build canonical controller file:
-    // start with global var (no semicolon) to match sample
-    gamemodeControllerCode += 'newNode = nil\n';
+    // Helper: normalize function body (keep existing helper)
+    const normalizeFunctionBody = (body) => {
+      if (!body) return '';
+      body = body.replace(/'([^'\n]*)'/g, "\"$1\"");
+      const lines = body.split('\n');
+      const out = [];
+      for (let line of lines) {
+        const trimmed = line.trim();
+        if (trimmed === '' || trimmed.startsWith('--')) {
+          out.push(line);
+          continue;
+        }
+        if (/\bfunction\b/.test(trimmed) || /^\s*end\s*$/.test(trimmed) || /\bthen$/.test(trimmed) || /^\s*(if|for|while)\b/.test(trimmed)) {
+          out.push(line);
+          continue;
+        }
+        if (!/;\s*$/.test(trimmed)) {
+          line = line.replace(/\s*$/, '') + ';';
+        }
+        out.push(line);
+      }
+      while (out.length && out[0].trim() === '') out.shift();
+      while (out.length && out[out.length - 1].trim() === '') out.pop();
+      return out.join('\n');
+    };
 
+    // Build canonical controller file with function bodies
     if (startBody !== null) {
       gamemodeControllerCode += 'GameModeController.Start = function(server)\n';
-      gamemodeControllerCode += normalizeFunctionBody(startBody) ? ('    ' + normalizeFunctionBody(startBody).replace(/\n/g, '\n    ') + '\n') : '';
-      gamemodeControllerCode += 'end\n';
-    } else if (hasStart) {
-      // fallback: if detection said there's a Start but we couldn't extract, include raw user code (normalized)
-      gamemodeControllerCode += 'GameModeController.Start = function(server)\n';
-      gamemodeControllerCode += normalizeFunctionBody(userCode) ? ('    ' + normalizeFunctionBody(userCode).replace(/\n/g, '\n    ') + '\n') : '';
+      const normalized = normalizeFunctionBody(startBody);
+      if (normalized) {
+        gamemodeControllerCode += '    ' + normalized.replace(/\n/g, '\n    ') + '\n';
+      }
       gamemodeControllerCode += 'end\n';
     } else {
-      // No Start: wrap user statements inside Start (common case)
-      const normalizedUser = normalizeFunctionBody(userCode);
-      gamemodeControllerCode += 'GameModeController.Start = function(server)\n';
-      gamemodeControllerCode += normalizedUser ? ('    ' + normalizedUser.replace(/\n/g, '\n    ') + '\n') : '';
-      gamemodeControllerCode += 'end\n';
+      gamemodeControllerCode += 'GameModeController.Start = function(server)\nend\n';
     }
 
     if (updateBody !== null) {
       gamemodeControllerCode += 'GameModeController.Update = function(server, deltaTime)\n';
-      gamemodeControllerCode += normalizeFunctionBody(updateBody) ? ('    ' + normalizeFunctionBody(updateBody).replace(/\n/g, '\n    ') + '\n') : '';
-      gamemodeControllerCode += 'end\n';
-    } else if (hasUpdate) {
-      gamemodeControllerCode += 'GameModeController.Update = function(server, deltaTime)\n';
-      gamemodeControllerCode += normalizeFunctionBody(userCode) ? ('    ' + normalizeFunctionBody(userCode).replace(/\n/g, '\n    ') + '\n') : '';
+      const normalized = normalizeFunctionBody(updateBody);
+      if (normalized) {
+        gamemodeControllerCode += '    ' + normalized.replace(/\n/g, '\n    ') + '\n';
+      }
       gamemodeControllerCode += 'end\n';
     } else {
-      // add empty Update
       gamemodeControllerCode += 'GameModeController.Update = function(server, deltaTime)\nend\n';
     }
 
     if (destroyBody !== null) {
       gamemodeControllerCode += 'GameModeController.Destroy = function()\n';
-      gamemodeControllerCode += normalizeFunctionBody(destroyBody) ? ('    ' + normalizeFunctionBody(destroyBody).replace(/\n/g, '\n    ') + '\n') : '';
-      gamemodeControllerCode += 'end\n';
-    } else if (hasDestroy) {
-      gamemodeControllerCode += 'GameModeController.Destroy = function()\n';
-      gamemodeControllerCode += normalizeFunctionBody(userCode) ? ('    ' + normalizeFunctionBody(userCode).replace(/\n/g, '\n    ') + '\n') : '';
+      const normalized = normalizeFunctionBody(destroyBody);
+      if (normalized) {
+        gamemodeControllerCode += '    ' + normalized.replace(/\n/g, '\n    ') + '\n';
+      }
       gamemodeControllerCode += 'end\n';
     } else {
-      // add empty Destroy
       gamemodeControllerCode += 'GameModeController.Destroy = function()\nend\n';
     }
 

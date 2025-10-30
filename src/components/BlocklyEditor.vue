@@ -216,6 +216,271 @@ const defineGameModeBlocks = () => {
             colour: 330,
             tooltip: 'Declare a global variable',
             helpUrl: ''
+        },
+        'set_scale': {
+            type: 'set_scale',
+            message0: 'set %1 scale to %2',
+            args0: [
+                { type: 'input_value', name: 'NODE' },
+                { type: 'input_value', name: 'SCALE' }
+            ],
+            previousStatement: null,
+            nextStatement: null,
+            colour: 160,
+            tooltip: 'Set node scale',
+            helpUrl: ''
+        },
+        'get_scale': {
+            type: 'get_scale',
+            message0: '%1 scale',
+            args0: [{ type: 'input_value', name: 'NODE' }],
+            output: 'Vector3',
+            colour: 160,
+            tooltip: 'Get node scale',
+            helpUrl: ''
+        },
+        'set_world_position': {
+            type: 'set_world_position',
+            message0: 'set %1 world position to %2',
+            args0: [
+                { type: 'input_value', name: 'NODE' },
+                { type: 'input_value', name: 'POSITION' }
+            ],
+            previousStatement: null,
+            nextStatement: null,
+            colour: 160,
+            tooltip: 'Set node world position',
+            helpUrl: ''
+        },
+        'get_world_position': {
+            type: 'get_world_position',
+            message0: '%1 world position',
+            args0: [{ type: 'input_value', name: 'NODE' }],
+            output: 'Vector3',
+            colour: 160,
+            tooltip: 'Get node world position',
+            helpUrl: ''
+        },
+        'get_nodes': {
+            type: 'get_nodes',
+            message0: 'get nodes from %1 with filter %2',
+            args0: [
+                { type: 'input_value', name: 'SPACE' },
+                { type: 'input_value', name: 'FILTER' }
+            ],
+            output: 'Array',
+            colour: 160,
+            tooltip: 'Get filtered nodes from space',
+            helpUrl: ''
+        },
+        'get_node_name': {
+            type: 'get_node_name',
+            message0: '%1 name',
+            args0: [{ type: 'input_value', name: 'NODE' }],
+            output: 'String',
+            colour: 160,
+            tooltip: 'Get node name',
+            helpUrl: ''
+        },
+        'destroy_node': {
+            type: 'destroy_node',
+            message0: 'destroy node %1 from space %2',
+            args0: [
+                { type: 'input_value', name: 'NODE' },
+                { type: 'input_value', name: 'SPACE' }
+            ],
+            previousStatement: null,
+            nextStatement: null,
+            colour: 160,
+            tooltip: 'Destroy a node from space',
+            helpUrl: ''
+        },
+        'vector3_distance': {
+            type: 'vector3_distance',
+            message0: 'distance from %1 to %2',
+            args0: [
+                { type: 'input_value', name: 'FROM' },
+                { type: 'input_value', name: 'TO' }
+            ],
+            output: 'Number',
+            colour: 60,
+            tooltip: 'Calculate distance between two vectors',
+            helpUrl: ''
+        },
+        'string_find': {
+            type: 'string_find',
+            message0: 'find %1 in %2',
+            args0: [
+                { type: 'input_value', name: 'PATTERN' },
+                { type: 'input_value', name: 'STRING' }
+            ],
+            output: 'Number',
+            colour: 160,
+            tooltip: 'Find pattern in string (returns position or nil)',
+            helpUrl: ''
+        },
+        'string_format': {
+            type: 'string_format',
+            message0: 'format %1 with %2',
+            args0: [
+                { type: 'input_value', name: 'FORMAT' },
+                { type: 'input_value', name: 'VALUE' }
+            ],
+            output: 'String',
+            colour: 160,
+            tooltip: 'Format string with value',
+            helpUrl: ''
+        },
+        'vector3_component': {
+            type: 'vector3_component',
+            message0: '%1 %2',
+            args0: [
+                { type: 'input_value', name: 'VECTOR' },
+                { type: 'field_dropdown', name: 'COMPONENT', options: [['X', 'X'], ['Y', 'Y'], ['Z', 'Z']] }
+            ],
+            output: 'Number',
+            colour: 60,
+            tooltip: 'Get vector component (X, Y, or Z)',
+            helpUrl: ''
+        },
+        'add_component_by_name': {
+            type: 'add_component_by_name',
+            message0: 'add component %1 to %2',
+            args0: [
+                { type: 'input_value', name: 'NAME' },
+                { type: 'input_value', name: 'NODE' }
+            ],
+            previousStatement: null,
+            nextStatement: null,
+            colour: 230,
+            tooltip: 'Add component by name to node',
+            helpUrl: ''
+        },
+        'print_statement': {
+            type: 'print_statement',
+            message0: 'print %1',
+            args0: [{ type: 'input_value', name: 'TEXT' }],
+            previousStatement: null,
+            nextStatement: null,
+            colour: 160,
+            tooltip: 'Print a message',
+            helpUrl: ''
+        },
+        'for_loop_array': {
+            type: 'for_loop_array',
+            message0: 'for %1 from 1 to length of %2 %3 %4',
+            args0: [
+                { type: 'field_variable', name: 'VAR', variable: 'i' },
+                { type: 'input_value', name: 'ARRAY' },
+                { type: 'input_dummy' },
+                { type: 'input_statement', name: 'DO' }
+            ],
+            previousStatement: null,
+            nextStatement: null,
+            colour: 120,
+            tooltip: 'For loop iterating through array indices',
+            helpUrl: ''
+        },
+        'array_index': {
+            type: 'array_index',
+            message0: '%1 [ %2 ]',
+            args0: [
+                { type: 'input_value', name: 'ARRAY' },
+                { type: 'input_value', name: 'INDEX' }
+            ],
+            output: null,
+            colour: 260,
+            tooltip: 'Get item at index from array',
+            helpUrl: ''
+        },
+        'array_length': {
+            type: 'array_length',
+            message0: 'length of %1',
+            args0: [{ type: 'input_value', name: 'ARRAY' }],
+            output: 'Number',
+            colour: 260,
+            tooltip: 'Get array length',
+            helpUrl: ''
+        },
+        'string_concat': {
+            type: 'string_concat',
+            message0: '%1 .. %2',
+            args0: [
+                { type: 'input_value', name: 'A' },
+                { type: 'input_value', name: 'B' }
+            ],
+            output: 'String',
+            colour: 160,
+            tooltip: 'Concatenate strings with ..',
+            helpUrl: ''
+        },
+        'declare_local_variable': {
+            type: 'declare_local_variable',
+            message0: 'local %1 = %2',
+            args0: [
+                { type: 'field_variable', name: 'VAR', variable: 'variable' },
+                { type: 'input_value', name: 'VALUE' }
+            ],
+            previousStatement: null,
+            nextStatement: null,
+            colour: 330,
+            tooltip: 'Declare a local variable with value',
+            helpUrl: ''
+        },
+        'if_statement_comparison': {
+            type: 'if_statement_comparison',
+            message0: 'if %1 %2 %3 then %4 %5',
+            args0: [
+                { type: 'input_value', name: 'A' },
+                { type: 'field_dropdown', name: 'OP', options: [['==', '=='], ['~=', '~='], ['<', '<'], ['>', '>'], ['<=', '<='], ['>=', '>=']] },
+                { type: 'input_value', name: 'B' },
+                { type: 'input_dummy' },
+                { type: 'input_statement', name: 'DO' }
+            ],
+            previousStatement: null,
+            nextStatement: null,
+            colour: 210,
+            tooltip: 'If statement with comparison',
+            helpUrl: ''
+        },
+        'return_statement': {
+            type: 'return_statement',
+            message0: 'return',
+            previousStatement: null,
+            colour: 330,
+            tooltip: 'Return from function',
+            helpUrl: ''
+        },
+        'number_literal': {
+            type: 'number_literal',
+            message0: '%1',
+            args0: [{ type: 'field_number', name: 'NUM', value: 1 }],
+            output: 'Number',
+            colour: 230,
+            tooltip: 'Number literal',
+            helpUrl: ''
+        },
+        'anonymous_function': {
+            type: 'anonymous_function',
+            message0: 'function ( %1 ) %2 return %3',
+            args0: [
+                { type: 'field_input', name: 'PARAMS', text: 'node' },
+                { type: 'input_dummy' },
+                { type: 'input_value', name: 'RETURN' }
+            ],
+            output: 'Function',
+            colour: 290,
+            tooltip: 'Anonymous function that returns a value',
+            helpUrl: ''
+        },
+        'boolean_literal': {
+            type: 'boolean_literal',
+            message0: '%1',
+            args0: [{ type: 'field_dropdown', name: 'BOOL', options: [['true', 'TRUE'], ['false', 'FALSE']] }],
+            output: 'Boolean',
+            colour: 210,
+            tooltip: 'Boolean literal',
+            helpUrl: ''
         }
     };
 
@@ -231,6 +496,13 @@ const defineGameModeBlocks = () => {
 
 // Define Lua generators for GameMode blocks
 const defineGameModeGenerators = () => {
+    // Override Blockly's built-in variables_set generator to add semicolons
+    luaGenerator.forBlock['variables_set'] = function (block, generator) {
+        const varName = generator.getVariableName(block.getFieldValue('VAR'));
+        const value = generator.valueToCode(block, 'VALUE', Order.NONE) || '0';
+        return `${varName} = ${value};\n`;
+    };
+
     luaGenerator.forBlock['gamemode_start'] = function (block, generator) {
         const statements = generator.statementToCode(block, 'CODE');
         return `GameModeController.Start = function(server)\n${statements}end\n`;
@@ -322,6 +594,144 @@ const defineGameModeGenerators = () => {
         const name = generator.valueToCode(block, 'NAME', Order.ATOMIC) || 'nil';
         return `${name} = nil\n`;
     };
+
+    luaGenerator.forBlock['declare_local_variable'] = function (block, generator) {
+        const varName = generator.getVariableName(block.getFieldValue('VAR'));
+        const value = generator.valueToCode(block, 'VALUE', Order.ATOMIC) || 'nil';
+        return `local ${varName} = ${value}\n`;
+    };
+
+    luaGenerator.forBlock['set_scale'] = function (block, generator) {
+        const node = generator.valueToCode(block, 'NODE', Order.ATOMIC) || 'nil';
+        const scale = generator.valueToCode(block, 'SCALE', Order.ATOMIC) || 'Vector3.FromValues(1, 1, 1)';
+        return `${node}.Scale = ${scale};\n`;
+    };
+
+    luaGenerator.forBlock['get_scale'] = function (block, generator) {
+        const node = generator.valueToCode(block, 'NODE', Order.ATOMIC) || 'nil';
+        return [`${node}.Scale`, Order.HIGH];
+    };
+
+    luaGenerator.forBlock['set_world_position'] = function (block, generator) {
+        const node = generator.valueToCode(block, 'NODE', Order.ATOMIC) || 'nil';
+        const position = generator.valueToCode(block, 'POSITION', Order.ATOMIC) || 'Vector3.Zero()';
+        return `${node}.WorldPosition = ${position};\n`;
+    };
+
+    luaGenerator.forBlock['get_world_position'] = function (block, generator) {
+        const node = generator.valueToCode(block, 'NODE', Order.ATOMIC) || 'nil';
+        return [`${node}.WorldPosition`, Order.HIGH];
+    };
+
+    luaGenerator.forBlock['get_nodes'] = function (block, generator) {
+        const space = generator.valueToCode(block, 'SPACE', Order.ATOMIC) || 'space';
+        const filter = generator.valueToCode(block, 'FILTER', Order.ATOMIC) || 'function(node) return true end';
+        return [`${space}:GetNodes(${filter})`, Order.HIGH];
+    };
+
+    luaGenerator.forBlock['get_node_name'] = function (block, generator) {
+        const node = generator.valueToCode(block, 'NODE', Order.ATOMIC) || 'nil';
+        return [`${node}:GetName()`, Order.HIGH];
+    };
+
+    luaGenerator.forBlock['destroy_node'] = function (block, generator) {
+        const node = generator.valueToCode(block, 'NODE', Order.ATOMIC) || 'nil';
+        const space = generator.valueToCode(block, 'SPACE', Order.ATOMIC) || 'space';
+        return `${space}:DestroyNode(${node});\n`;
+    };
+
+    luaGenerator.forBlock['vector3_distance'] = function (block, generator) {
+        const from = generator.valueToCode(block, 'FROM', Order.ATOMIC) || 'Vector3.Zero()';
+        const to = generator.valueToCode(block, 'TO', Order.ATOMIC) || 'Vector3.Zero()';
+        return [`${from}:Distance(${to})`, Order.HIGH];
+    };
+
+    luaGenerator.forBlock['string_find'] = function (block, generator) {
+        const pattern = generator.valueToCode(block, 'PATTERN', Order.ATOMIC) || '""';
+        const string = generator.valueToCode(block, 'STRING', Order.ATOMIC) || '""';
+        return [`string.find(${string}, ${pattern})`, Order.HIGH];
+    };
+
+    luaGenerator.forBlock['string_format'] = function (block, generator) {
+        const format = generator.valueToCode(block, 'FORMAT', Order.ATOMIC) || '""';
+        const value = generator.valueToCode(block, 'VALUE', Order.ATOMIC) || '0';
+        return [`string.format(${format}, ${value})`, Order.HIGH];
+    };
+
+    luaGenerator.forBlock['vector3_component'] = function (block, generator) {
+        const vector = generator.valueToCode(block, 'VECTOR', Order.ATOMIC) || 'Vector3.Zero()';
+        const component = block.getFieldValue('COMPONENT');
+        return [`${vector}.${component}`, Order.HIGH];
+    };
+
+    luaGenerator.forBlock['add_component_by_name'] = function (block, generator) {
+        const name = generator.valueToCode(block, 'NAME', Order.ATOMIC) || '""';
+        const node = generator.valueToCode(block, 'NODE', Order.ATOMIC) || 'nil';
+        return `${node}:AddComponent(${name});\n`;
+    };
+
+    luaGenerator.forBlock['print_statement'] = function (block, generator) {
+        const text = generator.valueToCode(block, 'TEXT', Order.ATOMIC) || '""';
+        return `print(${text});\n`;
+    };
+
+    luaGenerator.forBlock['for_loop_array'] = function (block, generator) {
+        const variable = generator.getVariableName(block.getFieldValue('VAR'));
+        const array = generator.valueToCode(block, 'ARRAY', Order.ATOMIC) || 'array';
+        const statements = generator.statementToCode(block, 'DO');
+        return `for ${variable} = 1, #${array} do\n${statements}end\n`;
+    };
+
+    luaGenerator.forBlock['array_index'] = function (block, generator) {
+        const array = generator.valueToCode(block, 'ARRAY', Order.ATOMIC) || 'array';
+        const index = generator.valueToCode(block, 'INDEX', Order.ATOMIC) || '1';
+        return [`${array}[${index}]`, Order.HIGH];
+    };
+
+    luaGenerator.forBlock['array_length'] = function (block, generator) {
+        const array = generator.valueToCode(block, 'ARRAY', Order.ATOMIC) || 'array';
+        return [`#${array}`, Order.HIGH];
+    };
+
+    luaGenerator.forBlock['string_concat'] = function (block, generator) {
+        const a = generator.valueToCode(block, 'A', Order.CONCATENATION) || '""';
+        const b = generator.valueToCode(block, 'B', Order.CONCATENATION) || '""';
+        return [`${a} .. ${b}`, Order.CONCATENATION];
+    };
+
+    luaGenerator.forBlock['declare_local_variable'] = function (block, generator) {
+        const varName = generator.getVariableName(block.getFieldValue('VAR'));
+        const value = generator.valueToCode(block, 'VALUE', Order.ATOMIC) || 'nil';
+        return `local ${varName} = ${value};\n`;
+    };
+
+    luaGenerator.forBlock['if_statement_comparison'] = function (block, generator) {
+        const a = generator.valueToCode(block, 'A', Order.ATOMIC) || 'nil';
+        const op = block.getFieldValue('OP');
+        const b = generator.valueToCode(block, 'B', Order.ATOMIC) || 'nil';
+        const statements = generator.statementToCode(block, 'DO');
+        return `if ${a} ${op} ${b} then\n${statements}end\n`;
+    };
+
+    luaGenerator.forBlock['return_statement'] = function (block, generator) {
+        return 'return;\n';
+    };
+
+    luaGenerator.forBlock['number_literal'] = function (block, generator) {
+        const num = block.getFieldValue('NUM');
+        return [String(num), Order.ATOMIC];
+    };
+
+    luaGenerator.forBlock['anonymous_function'] = function (block, generator) {
+        const params = block.getFieldValue('PARAMS');
+        const returnValue = generator.valueToCode(block, 'RETURN', Order.ATOMIC) || 'true';
+        return [`function(${params}) return ${returnValue} end`, Order.ATOMIC];
+    };
+
+    luaGenerator.forBlock['boolean_literal'] = function (block, generator) {
+        const bool = block.getFieldValue('BOOL') === 'TRUE' ? 'true' : 'false';
+        return [bool, Order.ATOMIC];
+    };
 };
 
 const initBlockly = () => {
@@ -347,7 +757,8 @@ const initBlockly = () => {
                 contents: [
                     { kind: 'block', type: 'gamemode_start' },
                     { kind: 'block', type: 'gamemode_update' },
-                    { kind: 'block', type: 'declare_variable' }
+                    { kind: 'block', type: 'declare_variable' },
+                    { kind: 'block', type: 'declare_local_variable' }
                 ]
             },
             {
@@ -357,7 +768,10 @@ const initBlockly = () => {
                 contents: [
                     { kind: 'block', type: 'get_space' },
                     { kind: 'block', type: 'create_node' },
-                    { kind: 'block', type: 'add_node_to_space' }
+                    { kind: 'block', type: 'add_node_to_space' },
+                    { kind: 'block', type: 'get_nodes' },
+                    { kind: 'block', type: 'get_node_name' },
+                    { kind: 'block', type: 'destroy_node' }
                 ]
             },
             {
@@ -366,7 +780,8 @@ const initBlockly = () => {
                 colour: '#45B7D1',
                 contents: [
                     { kind: 'block', type: 'add_gltf_component' },
-                    { kind: 'block', type: 'add_component' }
+                    { kind: 'block', type: 'add_component' },
+                    { kind: 'block', type: 'add_component_by_name' }
                 ]
             },
             {
@@ -377,7 +792,11 @@ const initBlockly = () => {
                     { kind: 'block', type: 'set_position' },
                     { kind: 'block', type: 'set_rotation' },
                     { kind: 'block', type: 'add_position' },
-                    { kind: 'block', type: 'add_rotation' }
+                    { kind: 'block', type: 'add_rotation' },
+                    { kind: 'block', type: 'set_scale' },
+                    { kind: 'block', type: 'get_scale' },
+                    { kind: 'block', type: 'set_world_position' },
+                    { kind: 'block', type: 'get_world_position' }
                 ]
             },
             {
@@ -386,8 +805,11 @@ const initBlockly = () => {
                 colour: '#FFEAA7',
                 contents: [
                     { kind: 'block', type: 'vector3_create' },
+                    { kind: 'block', type: 'vector3_distance' },
+                    { kind: 'block', type: 'vector3_component' },
                     { kind: 'block', type: 'multiply_number' },
                     { kind: 'block', type: 'math_number' },
+                    { kind: 'block', type: 'number_literal' },
                     { kind: 'block', type: 'math_arithmetic' }
                 ]
             },
@@ -410,12 +832,15 @@ const initBlockly = () => {
                 colour: '#5C81A6',
                 contents: [
                     { kind: 'block', type: 'controls_if' },
+                    { kind: 'block', type: 'if_statement_comparison' },
                     { kind: 'block', type: 'logic_compare' },
                     { kind: 'block', type: 'logic_operation' },
                     { kind: 'block', type: 'logic_negate' },
                     { kind: 'block', type: 'logic_boolean' },
+                    { kind: 'block', type: 'boolean_literal' },
                     { kind: 'block', type: 'logic_null' },
-                    { kind: 'block', type: 'logic_ternary' }
+                    { kind: 'block', type: 'logic_ternary' },
+                    { kind: 'block', type: 'return_statement' }
                 ]
             },
             {
@@ -427,8 +852,18 @@ const initBlockly = () => {
                     { kind: 'block', type: 'controls_repeat' },
                     { kind: 'block', type: 'controls_whileUntil' },
                     { kind: 'block', type: 'controls_for' },
+                    { kind: 'block', type: 'for_loop_array' },
                     { kind: 'block', type: 'controls_forEach' },
                     { kind: 'block', type: 'controls_flow_statements' }
+                ]
+            },
+            {
+                kind: 'category',
+                name: 'Arrays',
+                colour: '#8B5A99',
+                contents: [
+                    { kind: 'block', type: 'array_index' },
+                    { kind: 'block', type: 'array_length' }
                 ]
             },
             {
@@ -438,6 +873,7 @@ const initBlockly = () => {
                 contents: [
                     { kind: 'block', type: 'text' },
                     { kind: 'block', type: 'text_join' },
+                    { kind: 'block', type: 'string_concat' },
                     { kind: 'block', type: 'text_append' },
                     { kind: 'block', type: 'text_length' },
                     { kind: 'block', type: 'text_isEmpty' },
@@ -446,7 +882,10 @@ const initBlockly = () => {
                     { kind: 'block', type: 'text_getSubstring' },
                     { kind: 'block', type: 'text_changeCase' },
                     { kind: 'block', type: 'text_trim' },
-                    { kind: 'block', type: 'text_print' }
+                    { kind: 'block', type: 'text_print' },
+                    { kind: 'block', type: 'print_statement' },
+                    { kind: 'block', type: 'string_find' },
+                    { kind: 'block', type: 'string_format' }
                 ]
             },
             {
@@ -462,6 +901,9 @@ const initBlockly = () => {
                 kind: 'category',
                 name: 'Functions',
                 colour: '#9A5CA6',
+                contents: [
+                    { kind: 'block', type: 'anonymous_function' }
+                ],
                 custom: 'PROCEDURE'
             }
         ]
@@ -490,16 +932,13 @@ const initBlockly = () => {
 const getCode = () => {
     if (!workspace.value) return '';
 
-    // Generate code without source maps
     const originalAddSourceMapping = luaGenerator.addSourceMapping;
-    luaGenerator.addSourceMapping = () => { }; // Disable source mapping
+    luaGenerator.addSourceMapping = () => { };
 
     let code = luaGenerator.workspaceToCode(workspace.value);
 
-    // Restore original source mapping function
     luaGenerator.addSourceMapping = originalAddSourceMapping;
 
-    // Clean up any duplicate function definitions
     const lines = code.split('\n');
     const cleanedLines = [];
     const seenFunctions = new Set();
@@ -511,7 +950,7 @@ const getCode = () => {
             if (funcMatch) {
                 const funcName = funcMatch[1];
                 if (seenFunctions.has(funcName)) {
-                    continue; // Skip duplicate function
+                    continue;
                 }
                 seenFunctions.add(funcName);
             }
@@ -521,28 +960,27 @@ const getCode = () => {
 
     code = cleanedLines.join('\n');
 
-    // Add global variable declarations and missing functions
     const hasStart = code.includes('GameModeController.Start');
     const hasUpdate = code.includes('GameModeController.Update');
 
     let finalCode = '';
 
-    // Add global variables that might be needed
+    // Only add newNode = nil once at the top if Start or Update exists
     if (hasStart || hasUpdate) {
-        finalCode += 'newNode = nil\n';
+        // Check if it's not already in the code
+        if (!code.startsWith('newNode = nil')) {
+            finalCode += 'newNode = nil\n';
+        }
     }
 
     finalCode += code;
 
-    // Add missing functions if they don't exist
     if (!code.includes('GameModeController.Destroy')) {
         finalCode += 'GameModeController.Destroy = function()\nend\n';
     }
 
-    // Remove any source mapping comments that might have slipped through
     finalCode = finalCode.replace(/--# sourceMappingURL=.*$/gm, '');
 
-    // --- New: normalize quotes and semicolons inside function bodies ---
     const normalizeCode = (raw) => {
         // Replace simple single-quoted strings with double quotes (safe for simple literals)
         raw = raw.replace(/'([^'\n]*)'/g, "\"$1\"");
@@ -570,8 +1008,13 @@ const getCode = () => {
 
             // If inside a function body, ensure simple statements end with semicolon
             if (inFunction && trimmed.length > 0 && !trimmed.startsWith('--')) {
-                // Skip lines that already end with ';' or are control lines (function/if/for/while/then)
-                if (!/;\s*$/.test(trimmed) && !/\bfunction\b/.test(trimmed) && !/\bthen\b$/.test(trimmed) && !/^\s*(if|for|while)\b/.test(trimmed)) {
+                // Skip lines that already end with ';' or are control lines
+                if (!/;\s*$/.test(trimmed) &&
+                    !/\bfunction\b/.test(trimmed) &&
+                    !/\bthen\b\s*$/.test(trimmed) &&
+                    !/\bdo\b\s*$/.test(trimmed) &&
+                    !/^\s*(if|for|while)\b/.test(trimmed)) {
+                    // Add semicolon to all other lines (including local declarations and assignments)
                     ln = ln.replace(/\s*$/, '') + ';';
                 }
             }
@@ -587,17 +1030,16 @@ const getCode = () => {
     return finalCode;
 };
 
-// Analyze workspace to find missing dependencies
 const analyzeWorkspace = (workspace) => {
     const analysis = {
-        createdNodes: new Set(),           // Nodes created with create_node
-        foundNodes: new Set(),              // Nodes found with find_node
-        nodesWithPhysics: new Set(),        // Nodes that have physics added
-        nodesUsingCollision: new Set(),     // Nodes using collision events
-        nodesNeedingPhysics: new Set(),     // Nodes needing physics (collision without physics)
-        missingNodeVariables: new Set(),    // Variables that should be declared
-        allNodeReferences: new Set(),       // All node variable references
-        nodeVariableMap: new Map()          // Map node names to their variable references
+        createdNodes: new Set(),
+        foundNodes: new Set(),
+        nodesWithPhysics: new Set(),
+        nodesUsingCollision: new Set(),
+        nodesNeedingPhysics: new Set(),
+        missingNodeVariables: new Set(),
+        allNodeReferences: new Set(),
+        nodeVariableMap: new Map()
     };
 
     const blocks = workspace.getAllBlocks();
@@ -605,14 +1047,12 @@ const analyzeWorkspace = (workspace) => {
     blocks.forEach(block => {
         const type = block.type;
 
-        // Track created nodes and their variable assignments
         if (type === 'vertex_create_node') {
             const nameBlock = block.getInputTargetBlock('NAME');
             if (nameBlock && nameBlock.type === 'text') {
                 const nodeName = nameBlock.getFieldValue('TEXT');
                 analysis.createdNodes.add(nodeName);
 
-                // Check if this node is stored in a variable
                 const parent = block.getParent();
                 if (parent && parent.type === 'variables_set') {
                     const varName = parent.getField('VAR')?.getText();
@@ -623,14 +1063,12 @@ const analyzeWorkspace = (workspace) => {
             }
         }
 
-        // Track found nodes and their variable assignments
         if (type === 'vertex_find_node') {
             const nameBlock = block.getInputTargetBlock('NAME');
             if (nameBlock && nameBlock.type === 'text') {
                 const nodeName = nameBlock.getFieldValue('TEXT');
                 analysis.foundNodes.add(nodeName);
 
-                // Check if this node is stored in a variable
                 const parent = block.getParent();
                 if (parent && parent.type === 'variables_set') {
                     const varName = parent.getField('VAR')?.getText();
@@ -641,7 +1079,6 @@ const analyzeWorkspace = (workspace) => {
             }
         }
 
-        // Track nodes with physics component
         if (type === 'vertex_add_physics') {
             const nodeBlock = block.getInputTargetBlock('NODE');
             const nodeInfo = extractNodeInfo(nodeBlock);
@@ -653,7 +1090,6 @@ const analyzeWorkspace = (workspace) => {
             }
         }
 
-        // Track nodes using collision events
         if (type === 'vertex_on_collision') {
             const nodeBlock = block.getInputTargetBlock('NODE');
             const nodeInfo = extractNodeInfo(nodeBlock);
@@ -666,7 +1102,6 @@ const analyzeWorkspace = (workspace) => {
             }
         }
 
-        // Track all variable references
         if (type === 'variables_get') {
             const varName = block.getField('VAR')?.getText();
             if (varName) {
@@ -675,7 +1110,6 @@ const analyzeWorkspace = (workspace) => {
         }
     });
 
-    // Find nodes that need physics but don't have it
     analysis.nodesUsingCollision.forEach(identifier => {
         if (!analysis.nodesWithPhysics.has(identifier)) {
             analysis.nodesNeedingPhysics.add(identifier);
@@ -685,22 +1119,19 @@ const analyzeWorkspace = (workspace) => {
     return analysis;
 };
 
-// Helper to extract node info from a block chain
 const extractNodeInfo = (block) => {
     if (!block) return null;
 
     const info = {
-        name: null,      // The literal name string (e.g., "myObject")
-        variable: null   // The variable name holding the node (e.g., "obj")
+        name: null,
+        variable: null
     };
 
-    // If it's a variable, get the variable name
     if (block.type === 'variables_get') {
         info.variable = block.getField('VAR')?.getText();
         return info;
     }
 
-    // If it's a create_node or find_node block, try to get the name
     if (block.type === 'vertex_create_node' || block.type === 'vertex_find_node') {
         const nameBlock = block.getInputTargetBlock('NAME');
         if (nameBlock && nameBlock.type === 'text') {
@@ -712,7 +1143,6 @@ const extractNodeInfo = (block) => {
     return null;
 };
 
-// Helper to extract node name from a block chain (for backwards compatibility)
 const extractNodeName = (block) => {
     const info = extractNodeInfo(block);
     if (!info) return null;
@@ -738,21 +1168,17 @@ const loadXml = (xmlText) => {
     }
 };
 
-// Lua code import functionality
 const importLuaCode = (luaCode) => {
     if (!workspace.value) {
         throw new Error('Workspace not initialized');
     }
 
-    // Clear the workspace first
     workspace.value.clear();
 
-    // Parse the Lua code and create blocks
     const parsedStructure = parseLuaCode(luaCode);
     createBlocksFromStructure(parsedStructure);
 };
 
-// Parse Lua code into a structured format
 const parseLuaCode = (luaCode) => {
     const structure = {
         variables: [],
@@ -769,10 +1195,8 @@ const parseLuaCode = (luaCode) => {
     for (let i = 0; i < lines.length; i++) {
         const line = lines[i].trim();
 
-        // Skip empty lines and comments
         if (!line || line.startsWith('--')) continue;
 
-        // Detect function declarations
         if (line.includes('GameModeController.Start')) {
             currentFunction = 'start';
             functionContent = [];
@@ -786,12 +1210,10 @@ const parseLuaCode = (luaCode) => {
             functionContent = [];
             braceCount = 0;
         } else if (currentFunction) {
-            // Track braces to know when function ends
             braceCount += (line.match(/function/g) || []).length;
             braceCount -= (line.match(/end/g) || []).length;
 
             if (braceCount < 0 || line === 'end') {
-                // Function ended, process content
                 if (currentFunction === 'start') {
                     structure.startFunction = parseStatements(functionContent);
                 } else if (currentFunction === 'update') {
@@ -803,7 +1225,6 @@ const parseLuaCode = (luaCode) => {
                 functionContent.push(line);
             }
         } else {
-            // Global variable declarations
             if (line.includes(' = nil') || line.includes(' = ')) {
                 const varMatch = line.match(/^(\w+)\s*=/);
                 if (varMatch) {
@@ -816,7 +1237,6 @@ const parseLuaCode = (luaCode) => {
     return structure;
 };
 
-// Parse individual statements within functions
 const parseStatements = (lines) => {
     const statements = [];
 
@@ -830,11 +1250,9 @@ const parseStatements = (lines) => {
     return statements;
 };
 
-// Parse a single Lua statement into block structure
 const parseStatement = (line) => {
     line = line.trim();
 
-    // Variable assignment with create_node
     const createNodeMatch = line.match(/(\w+)\s*=\s*space:CreateNode\(["']([^"']+)["']\)/);
     if (createNodeMatch) {
         return {
@@ -844,7 +1262,6 @@ const parseStatement = (line) => {
         };
     }
 
-    // Add node to space
     const addNodeMatch = line.match(/space:AddNode\((\w+)\)/);
     if (addNodeMatch) {
         return {
@@ -853,7 +1270,6 @@ const parseStatement = (line) => {
         };
     }
 
-    // Add GLTF component
     const gltfMatch = line.match(/(\w+):AddGltfComponent\(["']([^"']+)["']\)/);
     if (gltfMatch) {
         return {
@@ -863,7 +1279,6 @@ const parseStatement = (line) => {
         };
     }
 
-    // Set position
     const positionMatch = line.match(/(\w+)\.Position\s*=\s*Vector3\.FromValues\(([^)]+)\)/);
     if (positionMatch) {
         const coords = positionMatch[2].split(',').map(s => s.trim());
@@ -876,7 +1291,6 @@ const parseStatement = (line) => {
         };
     }
 
-    // Set rotation
     const rotationMatch = line.match(/(\w+)\.Rotation\s*=\s*Vector3\.FromValues\(([^)]+)\)/);
     if (rotationMatch) {
         const coords = rotationMatch[2].split(',').map(s => s.trim());
@@ -889,7 +1303,6 @@ const parseStatement = (line) => {
         };
     }
 
-    // Add to position
     const addPosMatch = line.match(/(\w+)\.Position\s*=\s*(\w+)\.Position:Add\(Vector3\.FromValues\(([^)]+)\)\)/);
     if (addPosMatch) {
         const coords = addPosMatch[3].split(',').map(s => s.trim());
@@ -902,7 +1315,6 @@ const parseStatement = (line) => {
         };
     }
 
-    // Variable declarations
     const varMatch = line.match(/^(\w+)\s*=\s*nil$/);
     if (varMatch) {
         return {
@@ -914,12 +1326,10 @@ const parseStatement = (line) => {
     return null;
 };
 
-// Create Blockly blocks from parsed structure
 const createBlocksFromStructure = (structure) => {
     let currentY = 50;
     const spacing = 150;
 
-    // Create variable declarations
     structure.variables.forEach((varName, index) => {
         createVariableBlock(varName, 50, currentY + (index * 80));
     });
@@ -928,21 +1338,17 @@ const createBlocksFromStructure = (structure) => {
         currentY += structure.variables.length * 80 + spacing;
     }
 
-    // Create Start function block
     if (structure.startFunction) {
         createGameModeBlock('gamemode_start', structure.startFunction, 50, currentY);
         currentY += spacing;
     }
 
-    // Create Update function block
     if (structure.updateFunction) {
         createGameModeBlock('gamemode_update', structure.updateFunction, 50, currentY);
     }
 };
 
-// Create a variable declaration block
 const createVariableBlock = (varName, x, y) => {
-    // Create variable in Blockly's variable model first
     workspace.value.createVariable(varName);
 
     const block = workspace.value.newBlock('declare_variable');
@@ -957,7 +1363,6 @@ const createVariableBlock = (varName, x, y) => {
     textBlock.render();
 };
 
-// Create GameMode function blocks with their statements
 const createGameModeBlock = (functionType, statements, x, y) => {
     const funcBlock = workspace.value.newBlock(functionType);
     funcBlock.moveBy(x, y);
@@ -981,13 +1386,11 @@ const createGameModeBlock = (functionType, statements, x, y) => {
     funcBlock.render();
 };
 
-// Create individual statement blocks
 const createStatementBlock = (statement) => {
     let block = null;
 
     switch (statement.type) {
         case 'variable_set_create_node':
-            // Create variable assignment with create_node
             workspace.value.createVariable(statement.variable);
             block = workspace.value.newBlock('variables_set');
             block.setFieldValue(statement.variable, 'VAR');
@@ -1065,7 +1468,6 @@ const createStatementBlock = (statement) => {
     return block;
 };
 
-// Helper to create Vector3 blocks
 const createVector3Block = (x, y, z) => {
     const vectorBlock = workspace.value.newBlock('vector3_create');
 
@@ -1089,7 +1491,6 @@ const createVector3Block = (x, y, z) => {
     return vectorBlock;
 };
 
-// Expose methods for parent component to access
 defineExpose({
     getCode,
     getXml,
