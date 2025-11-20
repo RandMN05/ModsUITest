@@ -1,0 +1,67 @@
+// Space and Node-related block definitions
+export const spaceNodeBlocks = {
+  get_space: {
+    type: "get_space",
+    message0: "get space",
+    output: "Space",
+    colour: 160,
+    tooltip: "Get the current Vertex space",
+    helpUrl: "",
+  },
+  create_node: {
+    type: "create_node",
+    message0: "create node %1",
+    args0: [{ type: "input_value", name: "NAME" }],
+    output: "Node",
+    colour: 160,
+    tooltip: "Create a new node",
+    helpUrl: "",
+  },
+  add_node_to_space: {
+    type: "add_node_to_space",
+    message0: "add %1 to space %2",
+    args0: [
+      { type: "input_value", name: "NODE" },
+      { type: "input_value", name: "SPACE" },
+    ],
+    previousStatement: null,
+    nextStatement: null,
+    colour: 160,
+    tooltip: "Add node to the space",
+    helpUrl: "",
+  },
+  get_nodes: {
+    type: "get_nodes",
+    message0: "get nodes from %1 with filter %2",
+    args0: [
+      { type: "input_value", name: "SPACE" },
+      { type: "input_value", name: "FILTER" },
+    ],
+    output: "Array",
+    colour: 160,
+    tooltip: "Get filtered nodes from space",
+    helpUrl: "",
+  },
+  get_node_name: {
+    type: "get_node_name",
+    message0: "%1 name",
+    args0: [{ type: "input_value", name: "NODE" }],
+    output: "String",
+    colour: 160,
+    tooltip: "Get node name",
+    helpUrl: "",
+  },
+  destroy_node: {
+    type: "destroy_node",
+    message0: "destroy node %1 from space %2",
+    args0: [
+      { type: "input_value", name: "NODE" },
+      { type: "input_value", name: "SPACE" },
+    ],
+    previousStatement: null,
+    nextStatement: null,
+    colour: 160,
+    tooltip: "Destroy a node from space",
+    helpUrl: "",
+  },
+};

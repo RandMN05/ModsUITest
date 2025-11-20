@@ -1,0 +1,75 @@
+// Array and String-related block definitions
+export const arrayStringBlocks = {
+  array_index: {
+    type: "array_index",
+    message0: "%1 [ %2 ]",
+    args0: [
+      { type: "input_value", name: "ARRAY" },
+      { type: "input_value", name: "INDEX" },
+    ],
+    output: null,
+    colour: 260,
+    tooltip: "Get item at index from array",
+    helpUrl: "",
+  },
+  array_length: {
+    type: "array_length",
+    message0: "length of %1",
+    args0: [{ type: "input_value", name: "ARRAY" }],
+    output: "Number",
+    colour: 260,
+    tooltip: "Get array length",
+    helpUrl: "",
+  },
+  for_loop_array: {
+    type: "for_loop_array",
+    message0: "for %1 from 1 to length of %2 %3 %4",
+    args0: [
+      { type: "field_variable", name: "VAR", variable: "i" },
+      { type: "input_value", name: "ARRAY" },
+      { type: "input_dummy" },
+      { type: "input_statement", name: "DO" },
+    ],
+    previousStatement: null,
+    nextStatement: null,
+    colour: 120,
+    tooltip: "For loop iterating through array indices",
+    helpUrl: "",
+  },
+  string_concat: {
+    type: "string_concat",
+    message0: "%1 .. %2",
+    args0: [
+      { type: "input_value", name: "A" },
+      { type: "input_value", name: "B" },
+    ],
+    output: "String",
+    colour: 160,
+    tooltip: "Concatenate strings with ..",
+    helpUrl: "",
+  },
+  string_find: {
+    type: "string_find",
+    message0: "find %1 in %2",
+    args0: [
+      { type: "input_value", name: "PATTERN" },
+      { type: "input_value", name: "STRING" },
+    ],
+    output: "Number",
+    colour: 160,
+    tooltip: "Find pattern in string (returns position or nil)",
+    helpUrl: "",
+  },
+  string_format: {
+    type: "string_format",
+    message0: "format %1 with %2",
+    args0: [
+      { type: "input_value", name: "FORMAT" },
+      { type: "input_value", name: "VALUE" },
+    ],
+    output: "String",
+    colour: 160,
+    tooltip: "Format string with value",
+    helpUrl: "",
+  },
+};

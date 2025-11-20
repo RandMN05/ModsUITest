@@ -1,0 +1,52 @@
+// GameMode-related block definitions
+export const gameModeBlocks = {
+  gamemode_start: {
+    type: "gamemode_start",
+    message0: "Start function %1 %2",
+    args0: [{ type: "input_dummy" }, { type: "input_statement", name: "CODE" }],
+    colour: 20,
+    tooltip: "GameModeController.Start function",
+    helpUrl: "",
+  },
+  gamemode_update: {
+    type: "gamemode_update",
+    message0: "Update function %1 %2",
+    args0: [{ type: "input_dummy" }, { type: "input_statement", name: "CODE" }],
+    colour: 20,
+    tooltip: "GameModeController.Update function with deltaTime",
+    helpUrl: "",
+  },
+  declare_variable: {
+    type: "declare_variable",
+    message0: "declare %1",
+    args0: [{ type: "input_value", name: "NAME" }],
+    previousStatement: null,
+    nextStatement: null,
+    colour: 330,
+    tooltip: "Declare a global variable",
+    helpUrl: "",
+  },
+  declare_local_variable: {
+    type: "declare_local_variable",
+    message0: "local %1 = %2",
+    args0: [
+      { type: "field_variable", name: "VAR", variable: "variable" },
+      { type: "input_value", name: "VALUE" },
+    ],
+    previousStatement: null,
+    nextStatement: null,
+    colour: 330,
+    tooltip: "Declare a local variable with value",
+    helpUrl: "",
+  },
+  print_statement: {
+    type: "print_statement",
+    message0: "print %1",
+    args0: [{ type: "input_value", name: "TEXT" }],
+    previousStatement: null,
+    nextStatement: null,
+    colour: 160,
+    tooltip: "Print a message",
+    helpUrl: "",
+  },
+};
